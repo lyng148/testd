@@ -43,6 +43,6 @@ FROM openjdk:8-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 
-EXPOSE 8082  # Không cần thay, Render override port
+EXPOSE 8082
 
 ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
