@@ -23,7 +23,7 @@ function getTourIdFromUrl() {
 
 async function loadTourInfo() {
     try {
-        const response = await fetch(`http://localhost:8082/api/tour/${tourId}`);
+        const response = await fetch(`https://testd-ii75.onrender.com/api/tour/${tourId}`);
         const tour = await response.json();
 
         document.getElementById('tourInfo').innerHTML = `
@@ -42,7 +42,7 @@ async function loadTourInfo() {
 
 async function loadAvailablePois() {
     try {
-        const response = await fetch('http://localhost:8082/api/poi/all');
+        const response = await fetch('https://testd-ii75.onrender.com/api/poi/all');
         availablePois = await response.json();
         renderAvailablePois();
     } catch (error) {
@@ -184,7 +184,7 @@ async function saveTourPois() {
     };
 
     try {
-        const response = await fetch('http://localhost:8082/api/assignpoi', {
+        const response = await fetch('https://testd-ii75.onrender.com/api/assignpoi', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

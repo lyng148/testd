@@ -7,7 +7,7 @@ let isLoading = false;
 let currentSearchParams = {};
 
 // API Base URL
-const API_BASE_URL = 'http://localhost:8082';
+const API_BASE_URL = 'https://testd-ii75.onrender.com';
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
@@ -413,7 +413,7 @@ function showLoading(show) {
 function deleteTour(id) {
     if (!confirm("Bạn có chắc chắn muốn xóa tour này?")) return;
 
-    fetch(`http://localhost:8082/api/tour/${id}`, {
+    fetch(`https://testd-ii75.onrender.com/api/tour/${id}`, {
         method: 'DELETE'
     })
         .then(response => {

@@ -5,7 +5,7 @@ let filteredPois = [];
 async function loadAllPois() {
     try {
         showLoading();
-        const response = await fetch('http://localhost:8082/api/poi/all');
+        const response = await fetch('https://testd-ii75.onrender.com/api/poi/all');
         allPois = await response.json();
 
         console.log('Loaded POIs:', allPois); // Debug
@@ -125,7 +125,7 @@ async function deletePoi(id) {
 
     try {
         // Sửa endpoint để khớp với backend
-        const response = await fetch(`http://localhost:8082/api/onepoi/${id}`, {
+        const response = await fetch(`https://testd-ii75.onrender.com/api/onepoi/${id}`, {
             method: 'DELETE'
         });
 
@@ -157,8 +157,8 @@ async function filterPois() {
 
         if (type) {
             // Gọi API lọc theo typename - SỬA ENDPOINT
-            console.log('Calling API:', `http://localhost:8082/api/poi/typename/${encodeURIComponent(type)}`);
-            const response = await fetch(`http://localhost:8082/api/poi/typename?typename=${encodeURIComponent(type)}`);
+            console.log('Calling API:', `https://testd-ii75.onrender.com/api/poi/typename/${encodeURIComponent(type)}`);
+            const response = await fetch(`https://testd-ii75.onrender.com/api/poi/typename?typename=${encodeURIComponent(type)}`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -182,7 +182,7 @@ async function filterPois() {
 }
 
 function goBack1() {
-    window.location.href = 'http://localhost:8082/index.html';
+    window.location.href = 'https://testd-ii75.onrender.com/index.html';
 }
 
 // Start

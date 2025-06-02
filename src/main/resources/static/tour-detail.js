@@ -13,7 +13,7 @@ async function loadPOIs() {
 
     try {
         showLoading();
-        const response = await fetch(`http://localhost:8082/api/listtour/${tourId}`);
+        const response = await fetch(`https://testd-ii75.onrender.com/api/listtour/${tourId}`);
         pois = await response.json();
 
 
@@ -83,7 +83,7 @@ async function deletePoi(index) {
     if (!confirm(`Xóa "${poi.name}"?`)) return;
 
     try {
-        const response = await fetch(`http://localhost:8082/api/poioftour/${poi.tourPoiId}`, {
+        const response = await fetch(`https://testd-ii75.onrender.com/api/poioftour/${poi.tourPoiId}`, {
             method: 'DELETE'
         });
 

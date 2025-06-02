@@ -18,7 +18,7 @@ async function loadPoiData(poiId) {
     try {
         showLoading();
 
-        const response = await fetch(`http://localhost:8082/api/onepoi/${poiId}`);
+        const response = await fetch(`https://testd-ii75.onrender.com/api/onepoi/${poiId}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -95,7 +95,7 @@ document.getElementById('editPoiForm').addEventListener('submit', async function
     }
 
     try {
-        const response = await fetch(`http://localhost:8082/api/onepoi`, {
+        const response = await fetch(`https://testd-ii75.onrender.com/api/onepoi`, {
             method: 'POST', // Sử dụng POST vì backend dùng saveorupdate
             headers: {
                 'Content-Type': 'application/json',

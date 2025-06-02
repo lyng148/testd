@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = {"https://quanhne.id.vn", "http://localhost:3000", "http://localhost:8080", "http://127.0.0.1:5500", "https://gr1-lzkf.onrender.com"})
 public class NewAPI {
     @Autowired
     private TourService tourService;

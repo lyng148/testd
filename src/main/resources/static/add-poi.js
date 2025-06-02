@@ -20,7 +20,7 @@ document.getElementById('poiForm').addEventListener('submit', async function(e) 
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/onepoi', {
+        const response = await fetch('https://testd-ii75.onrender.com/api/onepoi', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

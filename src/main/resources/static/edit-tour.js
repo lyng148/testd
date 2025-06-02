@@ -23,7 +23,7 @@ async function loadTourData() {
     try {
         showLoading();
 
-        const response = await fetch(`http://localhost:8082/api/tour/${tourId}`);
+        const response = await fetch(`https://testd-ii75.onrender.com/api/tour/${tourId}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -78,7 +78,7 @@ document.getElementById('tourForm').addEventListener('submit', async function(e)
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/tour', {
+        const response = await fetch('https://testd-ii75.onrender.com/api/tour', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -19,7 +19,7 @@ async function loadPoiDetail() {
         showLoading();
 
         // Gọi API chi tiết POI
-        const response = await fetch(`http://localhost:8082/api/poi/${poiId}`);
+        const response = await fetch(`https://testd-ii75.onrender.com/api/poi/${poiId}`);
         console.log('API Response status:', response.status); // Debug
 
         if (!response.ok) {

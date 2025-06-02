@@ -156,7 +156,7 @@ async function filterPois() {
         let pois = [];
 
         if (type) {
-            // Gọi API lọc theo typename - SỬA ENDPOINT
+
             console.log('Calling API:', `http://localhost:8082/api/poi/typename/${encodeURIComponent(type)}`);
             const response = await fetch(`http://localhost:8082/api/poi/typename?typename=${encodeURIComponent(type)}`);
 
