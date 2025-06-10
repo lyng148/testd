@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = {"https://quanhne.id.vn", "http://localhost:3000", "http://localhost:8080", "http://127.0.0.1:5500", "https://gr1-lzkf.onrender.com"})
@@ -116,20 +117,35 @@ public class NewAPI {
 
         // Dùng query param: ?typename=Eco
         @GetMapping("/typename")
-        public List<PoiDTO> getPoisByTypename(@RequestParam("typename") String typename) {
-            List<PoiEntity> entities = poiRepository.findByTypename(typename);
-            List<PoiDTO> dtos = new ArrayList<>();
+        public List<PoiDTO> getPoisByTypename(
+                @RequestParam(name = "typename", required = false) String typename,
+                @RequestParam(name = "address", required = false) String address) {
 
-            for (PoiEntity e : entities) {
-                dtos.add(new PoiDTO(
-                        e.getId(), e.getName(), e.getTypename(), e.getAddress(),
-                        e.getDescription(), e.getImageUrl(), e.getOpenTime(),
-                        e.getCloseTime(), e.getPrice()
-                ));
+            List<PoiEntity> entities;
+
+            if (typename != null && !typename.isEmpty() && address != null && !address.isEmpty()) {
+                // Cả tên và loại đều được chỉ định
+                entities = poiRepository.findByTypenameContainingIgnoreCaseAndAddressContainingIgnoreCase(typename, address);
+            } else if (typename != null && !typename.isEmpty()) {
+                // Chỉ loại được chỉ định
+                entities = poiRepository.findByTypenameContainingIgnoreCase(typename);
+            } else if (address != null && !address.isEmpty()) {
+                // Chỉ tên được chỉ định
+                entities = poiRepository.findByAddressContainingIgnoreCase(address);
+            } else {
+                // Không có điều kiện lọc
+                entities = poiRepository.findAll();
             }
 
-            return dtos;
+            return entities.stream()
+                    .map(e -> new PoiDTO(
+                            e.getId(), e.getName(), e.getTypename(), e.getAddress(),
+                            e.getDescription(), e.getImageUrl(), e.getOpenTime(),
+                            e.getCloseTime(), e.getPrice()
+                    ))
+                    .collect(Collectors.toList());
         }
+
     }
 
     @PostMapping(value="api/onepoi")

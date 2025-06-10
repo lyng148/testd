@@ -9,6 +9,15 @@ public class TourDTO {
     private String imageUrl;
     private Integer price;
     private Integer  rating;
+    private String typetour;
+
+    public String getTypetour() {
+        return typetour;
+    }
+
+    public void setTypetour(String typetour) {
+        this.typetour = typetour;
+    }
 
     public Integer getId() {
         return id;

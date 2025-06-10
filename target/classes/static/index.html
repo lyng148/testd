@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 <!-- HEADER SECTION - NGẮN GỌN -->
@@ -180,16 +181,16 @@
     <!-- Results Header -->
     <div class="results-header">
       <div class="row align-items-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
           <h3 class="results-title">
             Kết quả tìm kiếm (<span id="resultsCount">0</span> tour)
           </h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="sort-section">
             <label>Sắp xếp theo:</label>
             <select class="form-select sort-select" id="sortBy">
-              <option value="newest">Mới nhất</option>
+
               <option value="price-low">Giá thấp → cao</option>
               <option value="price-high">Giá cao → thấp</option>
               <option value="rating">Đánh giá cao nhất</option>
@@ -199,17 +200,10 @@
       </div>
     </div>
 
-    <!-- Loading -->
-<!--    <div id="loadingState" class="loading-state" style="display: none;">-->
-<!--      <div class="loading-content">-->
-<!--        <div class="spinner-border text-primary" role="status"></div>-->
-<!--        <p>Đang tìm kiếm tours...</p>-->
-<!--      </div>-->
-<!--    </div>-->
 
     <!-- Tours List -->
     <div id="toursList" class="tours-list">
-      <!-- Tours được load bằng JavaScript -->
+
     </div>
 
     <!-- No Results -->

@@ -3,51 +3,52 @@ let filteredPois = [];
 
 // Load POI
 async function loadAllPois() {
-    try {
-        showLoading();
-        const response = await fetch('https://testd-ii75.onrender.com/api/poi/all');
-        allPois = await response.json();
+  try {
+    showLoading();
+    const response = await fetch("https://quanhne.id.vn/api/poi/all");
+    allPois = await response.json();
 
-        console.log('Loaded POIs:', allPois); // Debug
+    console.log("Loaded POIs:", allPois); // Debug
 
-        if (allPois.length > 0) {
-            filteredPois = [...allPois];
-            renderPois();
-            showPoiGrid();
-        } else {
-            showEmpty();
-        }
-    } catch (error) {
-        console.error('Lỗi:', error);
-        showEmpty();
+    if (allPois.length > 0) {
+      filteredPois = [...allPois];
+      renderPois();
+      showPoiGrid();
+    } else {
+      showEmpty();
     }
+  } catch (error) {
+    console.error("Lỗi:", error);
+    showEmpty();
+  }
 }
 
 // Show states
 function showLoading() {
-    document.getElementById('loading').classList.remove('d-none');
-    document.getElementById('poiGrid').classList.add('d-none');
-    document.getElementById('empty').classList.add('d-none');
+  document.getElementById("loading").classList.remove("d-none");
+  document.getElementById("poiGrid").classList.add("d-none");
+  document.getElementById("empty").classList.add("d-none");
 }
 
 function showPoiGrid() {
-    document.getElementById('loading').classList.add('d-none');
-    document.getElementById('poiGrid').classList.remove('d-none');
-    document.getElementById('empty').classList.add('d-none');
+  document.getElementById("loading").classList.add("d-none");
+  document.getElementById("poiGrid").classList.remove("d-none");
+  document.getElementById("empty").classList.add("d-none");
 }
 
 function showEmpty() {
-    document.getElementById('loading').classList.add('d-none');
-    document.getElementById('poiGrid').classList.add('d-none');
-    document.getElementById('empty').classList.remove('d-none');
+  document.getElementById("loading").classList.add("d-none");
+  document.getElementById("poiGrid").classList.add("d-none");
+  document.getElementById("empty").classList.remove("d-none");
 }
 
 // Render POIs
 function renderPois() {
-    const html = filteredPois.map(poi => {
-        // Tạo placeholder ảnh cố định nếu không có ảnh
-        const imageElement = poi.imageUrl ?
-            `<img src="${poi.imageUrl}" 
+  const html = filteredPois
+    .map((poi) => {
+      // Tạo placeholder ảnh cố định nếu không có ảnh
+      const imageElement = poi.imageUrl
+        ? `<img src="${poi.imageUrl}" 
                  class="card-img-top poi-image" 
                  alt="${poi.name}"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -55,135 +56,166 @@ function renderPois() {
                  <i class="fas fa-image"></i>
                  <span>Chưa có ảnh</span>
              </div>`
-            :
-            `<div class="poi-no-image">
+        : `<div class="poi-no-image">
                  <i class="fas fa-image"></i>
                  <span>Chưa có ảnh</span>
              </div>`;
 
-        return `
+      return `
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card poi-card h-100 shadow-sm">
                     <div class="position-relative poi-image-container">
                         ${imageElement}
                         <div class="poi-image-overlay"></div>
                         <div class="position-absolute top-0 start-0 m-2">
-                            <span class="badge bg-primary rounded-pill px-3">${poi.typename || 'Chưa phân loại'}</span>
+                            <span class="badge bg-primary rounded-pill px-3">${
+                              poi.typename || "Chưa phân loại"
+                            }</span>
                         </div>
                         <div class="position-absolute top-0 end-0 m-2">
                             <div class="d-flex gap-1">
-                                <button class="btn btn-warning btn-sm rounded-circle poi-action-btn" onclick="editPoi(${poi.id})" title="Chỉnh sửa POI">
+                                <button class="btn btn-warning btn-sm rounded-circle poi-action-btn" onclick="editPoi(${
+                                  poi.id
+                                })" title="Chỉnh sửa POI">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger btn-sm rounded-circle poi-action-btn" onclick="deletePoi(${poi.id})" title="Xóa POI">
+                                <button class="btn btn-danger btn-sm rounded-circle poi-action-btn" onclick="deletePoi(${
+                                  poi.id
+                                })" title="Xóa POI">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary fw-bold mb-2">${poi.name}</h5>
+                        <h5 class="card-title text-primary fw-bold mb-2">${
+                          poi.name
+                        }</h5>
                         <div class="mb-2">
                             <small class="text-muted">
                                 <i class="fas fa-map-marker-alt text-danger me-1"></i>
-                                ${poi.address || 'Chưa có địa chỉ'}
+                                ${poi.address || "Chưa có địa chỉ"}
                             </small>
                         </div>
                         <div class="mb-2">
                             <small class="text-info">
                                 <i class="fas fa-clock me-1"></i>
-                                ${poi.openTime || 'N/A'} - ${poi.closeTime || 'N/A'}
+                                ${poi.openTime || "N/A"} - ${
+        poi.closeTime || "N/A"
+      }
                             </small>
                         </div>
                         <p class="card-text text-secondary flex-grow-1 mb-3">
-                            ${(poi.description || 'Chưa có mô tả').substring(0, 100)}${poi.description && poi.description.length > 100 ? '...' : ''}
+                            ${(poi.description || "Chưa có mô tả").substring(
+                              0,
+                              100
+                            )}${
+        poi.description && poi.description.length > 100 ? "..." : ""
+      }
                         </p>
                         
                     </div>
                 </div>
             </div>
         `;
-    }).join('');
+    })
+    .join("");
 
-    document.getElementById('poiContainer').innerHTML = html;
-    document.getElementById('totalCount').textContent = filteredPois.length;
+  document.getElementById("poiContainer").innerHTML = html;
+  document.getElementById("totalCount").textContent = filteredPois.length;
 }
 
 // Thêm function editPoi
 function editPoi(id) {
-    window.location.href = `edit-poi.html?poiId=${id}`;
+  window.location.href = `edit-poi.html?poiId=${id}`;
 }
 
 // Actions
 
-
-
-
 async function deletePoi(id) {
-    const poi = filteredPois.find(p => p.id === id); // Sửa từ allPois thành filteredPois
-    if (!confirm(`Xóa "${poi.name}"?`)) return;
+  const poi = filteredPois.find((p) => p.id === id); // Sửa từ allPois thành filteredPois
+  if (!confirm(`Xóa "${poi.name}"?`)) return;
 
-    try {
-        // Sửa endpoint để khớp với backend
-        const response = await fetch(`https://testd-ii75.onrender.com/api/onepoi/${id}`, {
-            method: 'DELETE'
-        });
+  try {
+    // Sửa endpoint để khớp với backend
+    const response = await fetch(`https://quanhne.id.vn/api/onepoi/${id}`, {
+      method: "DELETE",
+    });
 
-        if (response.ok) {
-            alert('Xóa thành công!');
-            loadAllPois(); // Reload lại danh sách
-        } else {
-            alert('Lỗi xóa!');
-        }
-    } catch (error) {
-        console.error('Lỗi:', error);
-        alert('Lỗi kết nối!');
+    if (response.ok) {
+      alert("Xóa thành công!");
+      loadAllPois(); // Reload lại danh sách
+    } else {
+      alert("Lỗi xóa!");
     }
+  } catch (error) {
+    console.error("Lỗi:", error);
+    alert("Lỗi kết nối!");
+  }
 }
 
 function addNewPoi() {
-    window.location.href = 'add-poi.html';
+  window.location.href = "add-poi.html";
 }
 //loc poi
 async function filterPois() {
-    const type = document.getElementById('typeFilter').value;
+  const type = document.getElementById("typeFilter").value;
+  const address = document.getElementById("addressFilter").value.trim(); // Lấy địa chỉ từ form
 
-    console.log('Filter by type:', type); // Debug
+  console.log("Filter by type:", type);
+  console.log("Filter by address:", address);
 
-    try {
-        showLoading(); // Hiển thị loading
+  try {
+    showLoading();
 
-        let pois = [];
+    let pois = [];
 
-        if (type) {
-            // Gọi API lọc theo typename - SỬA ENDPOINT
-            console.log('Calling API:', `https://testd-ii75.onrender.com/api/poi/typename/${encodeURIComponent(type)}`);
-            const response = await fetch(`https://testd-ii75.onrender.com/api/poi/typename?typename=${encodeURIComponent(type)}`);
+    if (type || address) {
+      // Tạo URL với các query params
+      let apiUrl = `https://quanhne.id.vn/api/poi/typename?`;
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+      // Thêm typename nếu có
+      if (type) {
+        apiUrl += `typename=${encodeURIComponent(type)}`;
+      }
 
-            pois = await response.json();
-            console.log('Filtered POIs:', pois); // Debug
-        } else {
-            // Nếu không chọn loại, hiển thị tất cả
-            pois = [...allPois];
-        }
+      // Thêm address nếu có
+      if (address) {
+        apiUrl += `${type ? "&" : ""}address=${encodeURIComponent(address)}`;
+      }
 
-        filteredPois = pois;
-        renderPois();
-        showPoiGrid();
+      console.log("Calling API:", apiUrl);
+      const response = await fetch(apiUrl);
 
-    } catch (error) {
-        console.error("Lỗi khi lọc POI:", error);
-        showEmpty();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      pois = await response.json();
+    } else {
+      pois = [...allPois];
     }
+
+    filteredPois = pois;
+    renderPois();
+    showPoiGrid();
+
+    document.getElementById("totalCount").textContent = pois.length;
+  } catch (error) {
+    console.error("Lỗi khi lọc POI:", error);
+    showEmpty();
+  }
+}
+
+// Hàm xóa bộ lọc địa chỉ
+function clearAddressFilter() {
+  document.getElementById("addressFilter").value = "";
+  filterPois();
 }
 
 function goBack1() {
-    window.location.href = 'https://testd-ii75.onrender.com/index.html';
+  window.location.href = "https://quanhne.id.vn/index.html";
 }
 
 // Start
-document.addEventListener('DOMContentLoaded', loadAllPois);
+document.addEventListener("DOMContentLoaded", loadAllPois);

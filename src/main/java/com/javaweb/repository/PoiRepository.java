@@ -17,4 +17,12 @@ public interface PoiRepository extends JpaRepository<PoiEntity, Integer> {
     List<PoiEntity> findByTypename(String typename);
 
 
+    List<PoiEntity> findByTypenameAndName(String typename, String name);
+
+
+    List<PoiEntity> findByTypenameContainingIgnoreCaseAndAddressContainingIgnoreCase(String typename, String address);
+
+    List<PoiEntity> findByTypenameContainingIgnoreCase(String typename);
+
+    List<PoiEntity> findByAddressContainingIgnoreCase(String address);
 }

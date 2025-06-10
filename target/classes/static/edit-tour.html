@@ -52,6 +52,19 @@
                             <input type="text" class="form-control" id="address">
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label">Loại Tour</label>
+                            <select class="form-select" id="typetour">
+                                <option value="">Tất cả loại tour</option>
+                                <option value="Thám Hiểm">Thám Hiểm</option>
+                                <option value="Văn Hóa">Văn Hóa</option>
+                                <option value="Nghỉ Dưỡng">Nghỉ Dưỡng</option>
+                                <option value="Ẩm Thực">Ẩm Thực</option>
+                                <option value="Lịch Sử">Lịch Sử</option>
+                                <option value="Biển Đảo">Biển Đảo</option>
+                            </select>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Giá Tour (VND)</label>
@@ -107,10 +120,11 @@
 <script src="edit-tour.js"></script>
 </body>
 </html>
+<link rel="stylesheet" href="style.css">
 <style>
     /* Tour Edit Header Styles */
     .tour-edit-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--primary-color);
         padding: 1.5rem 0;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     }

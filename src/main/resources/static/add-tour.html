@@ -35,6 +35,8 @@
             <div class="card shadow">
                 <div class="card-body">
                     <form id="tourForm">
+
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Tên Tour <span class="text-danger">*</span></label>
@@ -49,6 +51,19 @@
                         <div class="mb-3">
                             <label class="form-label">Địa chỉ/Điểm khởi hành</label>
                             <input type="text" class="form-control" id="address">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Loại Tour</label>
+                            <select class="form-select" id="typetour">
+                                <option value="">Tất cả loại tour</option>
+                                <option value="Thám Hiểm">Thám Hiểm</option>
+                                <option value="Văn Hóa">Văn Hóa</option>
+                                <option value="Nghỉ Dưỡng">Nghỉ Dưỡng</option>
+                                <option value="Ẩm Thực">Ẩm Thực</option>
+                                <option value="Lịch Sử">Lịch Sử</option>
+                                <option value="Biển Đảo">Biển Đảo</option>
+                            </select>
                         </div>
 
                         <div class="row">
@@ -99,10 +114,11 @@
 <script src="add-tour.js"></script>
 </body>
 </html>
+<link rel="stylesheet" href="style.css">
 <style>
     /* Add Tour Header Styles */
     .add-tour-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--primary-color);
         padding: 1.5rem 0;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     }
